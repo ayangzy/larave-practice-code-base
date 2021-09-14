@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\User\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +19,20 @@ use App\Http\Controllers\Auth\VerificationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::post('/register', [RegistrationController::class, 'register']);
 Route::post('/verify', [VerificationController::class, 'verify']);
 Route::post('/login',[LoginController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(static function(){
+    Route::prefix('users')->name('user.')->group(function () {
+        Route::post('/logout', LogoutController::class);
+        Route::post('/update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+    });
+    
+});
+
+
+
+
