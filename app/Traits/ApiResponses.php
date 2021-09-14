@@ -45,4 +45,13 @@ trait ApiResponses
             
         ]);
     }
+
+    public function unauthorisedResponse($message, $status_code=401)
+    {
+        return response([
+            'status_code' => $status_code,
+            'status_text'=> 'bad_request',
+            'message' => $message,  
+        ]);
+    }
 }
