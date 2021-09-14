@@ -1,0 +1,1 @@
+Hello {{ $user->email }}. Here is your One time password (OTP) to verify your account. {{ $token }}
