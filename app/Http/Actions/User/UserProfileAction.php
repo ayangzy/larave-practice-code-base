@@ -44,14 +44,4 @@ class UserProfileAction
         }
     }
 
-    private function updateDetails($user, $fileName, $request)
-    {
-        $user->userDetails->update([
-            'image_url' => $fileName ?? $user->userDetails->image_url,
-            'first_name' => $request->first_name ?? $user->userDetails->first_name,
-            'last_name' => $request->last_name ?? $user->userDetails->last_name,
-            'middle_name' => $request->middle_name ?? $user->userDetails->middle_name,
-            'address' => $request->address
-        ]);
-    }
 }
