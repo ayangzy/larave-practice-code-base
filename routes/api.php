@@ -2,11 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\LogoutController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\User\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ use App\Http\Controllers\User\ProfileController;
 Route::post('/register', [RegistrationController::class, 'register']);
 Route::post('/verify', [VerificationController::class, 'verify']);
 Route::post('/login',[LoginController::class, 'login']);
+Route::post('generarteKey', [LoginController::class, 'generarteKey']);
 
 Route::middleware('auth:sanctum')->group(static function(){
     Route::prefix('users')->name('user.')->group(function () {
@@ -32,6 +34,15 @@ Route::middleware('auth:sanctum')->group(static function(){
     });
     
 });
+
+Route::prefix('orders')->name('order.')->group(function(){
+    Route::get('/', [OrderController::class, 'index']);
+    Route::get('/{id}', [OrderController::class, 'show']);
+    Route::post('/', [OrderController::class, 'store']);
+    Route::put('/{id}', [OrderController::class, 'update']);
+    Route::delete('/{id}', [OrderController::class, 'destroy']);
+});
+
 
 
 
