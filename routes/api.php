@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\User\ProfileController;
@@ -42,6 +43,8 @@ Route::prefix('orders')->name('order.')->group(function(){
     Route::put('/{id}', [OrderController::class, 'update']);
     Route::delete('/{id}', [OrderController::class, 'destroy']);
 });
+
+Route::post('payment', [PaymentController::class, 'initiatePayment']);
 
 
 
