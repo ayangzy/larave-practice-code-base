@@ -9,6 +9,7 @@ use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,12 @@ Route::prefix('orders')->name('order.')->group(function(){
 });
 
 Route::post('payment', [PaymentController::class, 'initiatePayment']);
+
+Route::prefix('payment-methods')->name('payment_method.')->group(function(){
+    Route::get('/', [PaymentMethodController::class, 'index'])->name('index');
+    Route::post('/', [PaymentMethodController::class, 'store'])->name('store');
+});
+
 
 
 
